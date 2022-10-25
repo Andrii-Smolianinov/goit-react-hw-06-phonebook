@@ -19,4 +19,4 @@ export const filterReducer = persistReducer(persistConfig, filterSlice.reducer);
 
 export const { setFilter } = filterSlice.actions;
 
-export const getFilterValue = state => state.filter.value;
+export const getFilter = state => state.filter;
