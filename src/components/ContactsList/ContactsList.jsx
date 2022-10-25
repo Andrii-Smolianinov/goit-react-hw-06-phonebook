@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 import { ChangeBackground } from 'components/ContactsList/BackgroundList';
 import { ContactUl } from 'components/ContactsList/ContactListStyled';
+import { useDispatch } from 'react-redux';
+import { removeContact } from 'redux/contactsSlice';
 
-const ContactList = ({ contacts, filter, onDeleteItem }) => {
+const ContactList = ({ contacts, filter }) => {
+  const dispatch = useDispatch();
+  const onDeleteItem = id => dispatch(removeContact(id));
+  
   return (
     <ContactUl>
       {contacts

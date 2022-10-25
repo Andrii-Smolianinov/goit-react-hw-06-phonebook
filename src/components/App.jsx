@@ -4,15 +4,16 @@ import { AppStyled } from 'components/AppStyled';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactsList/ContactsList';
-import { setFilter } from 'redux/filterSlice';
-import { addContact, removeContact } from 'redux/contactsSlice';
-// import { getContactsState } from 'redux/contactsSlice';
-// import { getFilter } from 'redux/filterSlice';
+import {
+  addContact,
+  setFilter,
+  getContacts,
+  getFilter,
+} from 'redux/contactsSlice';
 
 const App = () => {
-  const filter = useSelector(state => state.contacts.filter);
-  const contacts = useSelector(state => state.contacts.items);
-  console.log(contacts);
+  const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const addNewContact = (name, number) => {
@@ -28,22 +29,13 @@ const App = () => {
     }
   };
 
-  const deleteContact = id => {
-    dispatch(removeContact({ id }));
-  };
-
   return (
     <AppStyled>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addNewContact} />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={e => dispatch(setFilter(e))} />
-      <ContactList
-        contacts={contacts}
-        filter={filter.toLowerCase()}
-        onDeleteItem={deleteContact}
-      />
-      )
+      <ContactList contacts={contacts} filter={filter.toLowerCase()} />
     </AppStyled>
   );
 };
