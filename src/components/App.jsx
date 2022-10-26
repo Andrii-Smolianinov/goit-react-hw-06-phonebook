@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppStyled } from 'components/AppStyled';
+import { PhoneBookStyled } from 'components/PhoneBookStyled';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactsList/ContactsList';
@@ -22,7 +23,7 @@ const App = () => {
     if (
       contacts.find(contact => contact.name.toLowerCase() === nameNormalized)
     ) {
-      alert(name + ' is already in the contacts.');
+      Notify.warning(`${name} ${number} is already in the phone book!`);
     } else {
       const id = nanoid();
       dispatch(addContact({ id, name, number }));
@@ -30,13 +31,23 @@ const App = () => {
   };
 
   return (
-    <AppStyled>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={addNewContact} />
-      <h2>Contacts</h2>
-      <Filter value={filter} onChange={e => dispatch(setFilter(e))} />
-      <ContactList contacts={contacts} filter={filter.toLowerCase()} />
-    </AppStyled>
+    <PhoneBookStyled>
+      <main>
+        <h1>
+          <span className="spanP">P</span>honebook
+        </h1>
+        <ContactForm onSubmit={addNewContact} />
+      </main>
+      {contacts.length > 0 && (
+        <>
+          <h2>Contacts</h2>
+          <Filter value={filter} onChange={e => dispatch(setFilter(e))} />
+          <ContactList contacts={contacts} filter={filter.toLowerCase()} />
+        </>
+      )}
+      
+    </PhoneBookStyled>
+    
   );
 };
 

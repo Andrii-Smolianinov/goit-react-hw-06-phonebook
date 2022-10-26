@@ -16,28 +16,34 @@ const ContactForm = ({ onSubmit }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <label htmlFor="nameInput">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="nameInput"
-        value={name}
-        onChange={e => setName(e.target.value)}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-      />
-      <label htmlFor="numberInput">Number</label>
-      <input
-        type="tel"
-        name="number"
-        value={number}
-        id="numberInput"
-        onChange={e => setNumber(e.target.value)}
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-      />
+      <div>
+        <label htmlFor="nameInput">Name</label>
+        <input
+          type="text"
+          name="name"
+          id="nameInput"          
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder=" john doe"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="numberInput">Number</label>
+        <input
+          type="tel"
+          name="number"
+          value={number}
+          id="numberInput"
+          onChange={e => setNumber(e.target.value)}
+          placeholder="+380-11-111-1111"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+        />
+      </div>
       <button type="submit">Add contact</button>
     </Form>
   );
